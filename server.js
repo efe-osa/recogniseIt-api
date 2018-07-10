@@ -22,7 +22,7 @@ app.use(bodyparser.json())
 app.use(cors())
 
 app.get('/', (req, res) => {
-  res.send(psqldb.users)
+  res.send("psqldb")
 })
 
 app.post("/Signin", (req, res) => {login.loginCtrl(req, res, psqldb, bcrypt)} )
