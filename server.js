@@ -8,10 +8,12 @@ const register = require("./controllers/register")
 const login = require("./controllers/signin")
 const profile = require("./controllers/profile")
 const entries = require("./controllers/entries")
+
+
 const psqldb = knex({
   client: 'pg',
   connection: {
-    connectionString : 'procsss.env.DATABASE_URL',
+    connectionString : process.env.DATABASE_URL,
     ssl:  true
   }
 })

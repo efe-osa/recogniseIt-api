@@ -3,8 +3,9 @@ const registerCtrl = (req, res, psqldb, bcrypt) => {
  
   if (!email || !name || !password) {
     return res.status(400).json("incorrect form submission")
-  } else {
+  } 
     const hash = bcrypt.hashSync(password)
+    console.log(password)
       psqldb.transaction(trx => {
         trx.insert({
           hash,
