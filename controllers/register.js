@@ -1,5 +1,4 @@
 const registerCtrl = (req, res, psqldb, bcrypt) => {
-
   const { name, email, password } = req.body
  
   if (!email || !name || !password) {
@@ -7,11 +6,14 @@ const registerCtrl = (req, res, psqldb, bcrypt) => {
   } else {
     const hash = bcrypt.hashSync(password)
       psqldb.transaction(trx => {
-        trx.insert({hash, email})
-        .into('login')
+        trx.insert({
+          hash,
+          email
+        })
+        .into("login")
         .returning("email")
         .then(loginEmail => {  
-            return trx('users')
+            return trx("users")
               .returning('*')
               .insert({
                 email: loginEmail[0],
@@ -19,7 +21,7 @@ const registerCtrl = (req, res, psqldb, bcrypt) => {
                 joined: new Date()
               })
             .then(user => {
-              console.log(res)
+              console.log(user)
               res.json(user[0])
             })
         })        
