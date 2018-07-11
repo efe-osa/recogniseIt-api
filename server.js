@@ -11,10 +11,8 @@ const entries = require("./controllers/entries")
 const psqldb = knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : 'osawaru95',
-    database : 'brain-api'
+    host : 'procsss.env.DATABASE_URL',
+    ssl:  true
   }
 })
 
