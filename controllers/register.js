@@ -4,7 +4,7 @@ const registerCtrl = (req, res, psqldb, bcrypt) => {
  
   if (!email || !name || !password) {
     return res.status(400).json("incorrect form submission")
-  }
+  } else {
     const hash = bcrypt.hashSync(password)
       psqldb.transaction(trx => {
         trx.insert({hash, email})
@@ -19,6 +19,7 @@ const registerCtrl = (req, res, psqldb, bcrypt) => {
                 joined: new Date()
               })
             .then(user => {
+              console.log(res)
               res.json(user[0])
             })
         })        
@@ -26,6 +27,7 @@ const registerCtrl = (req, res, psqldb, bcrypt) => {
         .catch(trx.rollback)
       })
       .catch(err => res.status(400).json("unable to register"))
+    }
 }
 
 module.exports = {registerCtrl}
