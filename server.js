@@ -11,7 +11,7 @@ const entries = require("./controllers/entries")
 const psqldb = knex({
   client: 'pg',
   connection: {
-    host : 'procsss.env.DATABASE_URL',
+    connectionString : 'procsss.env.DATABASE_URL',
     ssl:  true
   }
 })
